@@ -1,6 +1,7 @@
-import { Dialog, Transition } from '@headlessui/react'
+import { Dialog,  Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 import { useDialogStore } from '@/stores/dialog-store'
+import OptionsMenu from './options-menu';
 
 function ViewDialog() {
   const { showViewDialog, closeViewDialog, tempEvent } = useDialogStore()
@@ -34,7 +35,8 @@ function ViewDialog() {
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
-                <div>
+                <div className='relative'>
+                  <OptionsMenu className='absolute -top-4 right-2' />
                   <div className="mt-3 text-center sm:mt-5">
                     <div className="mt-2 space-y-2 text-left">
                       <p><strong>Title:</strong> {tempEvent.title}</p>
