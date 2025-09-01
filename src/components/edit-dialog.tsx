@@ -3,22 +3,16 @@ import { Fragment, useEffect, useState } from 'react'
 import { CheckIcon } from '@heroicons/react/16/solid'
 import { useDialogStore } from '@/stores/dialog-store'
 import { useCalendarStore } from '@/stores/calendar-store'
-import useUser from '@/hooks/user-hook'
 
-function AddDialog() {
-  const {user} = useUser()
-
-  const { showAddDialog, closeAddDialog, tempEvent } = useDialogStore()
-  const { addEvent } = useCalendarStore()
+function EditDialog() {
+  const { showEditDialog, closeEditDialog, tempEvent } = useDialogStore()
+  const { updateEvent } = useCalendarStore()
 
   const [form, setForm] = useState(tempEvent)
 
-
   useEffect(() => {
-    setForm({ ...tempEvent, createdBy: { id: user?.id!, email: user?.email!, name: user?.name!, role: user?.role! } })
+    setForm(tempEvent)
   }, [tempEvent])
-
-  if (!user) return null
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
@@ -27,25 +21,13 @@ function AddDialog() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    addEvent(form)
-    setForm({
-      id: '',
-      title: '',
-      description: '',
-      priority: '',
-      target: '',
-      startDate: '',
-      startTime: '',
-      endDate: '',
-      endTime: '',
-      createdBy: { email: '', id: '', name: '', role: 'teacher' }
-    })
-    closeAddDialog()
+    updateEvent(form) // reemplaza el evento en la store
+    closeEditDialog()
   }
 
   return (
-    <Transition.Root show={showAddDialog} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={closeAddDialog}>
+    <Transition.Root show={showEditDialog} as={Fragment}>
+      <Dialog as="div" className="relative z-10" onClose={closeEditDialog}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -76,7 +58,7 @@ function AddDialog() {
                   </div>
                   <div className="mt-3 text-center sm:mt-5">
                     <Dialog.Title as="h3" className="text-base font-semibold leading-6 text-gray-900">
-                      Add Event
+                      Edit Event
                     </Dialog.Title>
                     <form onSubmit={handleSubmit} className="mt-2 space-y-2">
                       <input
@@ -145,7 +127,6 @@ function AddDialog() {
                           type="date"
                           name="endDate"
                           value={form.endDate}
-                          min={form.startDate}
                           onChange={handleChange}
                           className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
                         />
@@ -153,7 +134,6 @@ function AddDialog() {
                           type="time"
                           name="endTime"
                           value={form.endTime}
-                          min={form.startDate === form.endDate ? form.startTime : undefined}
                           onChange={handleChange}
                           className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
                         />
@@ -165,12 +145,12 @@ function AddDialog() {
                           className="inline-flex w-full justify-center rounded-md bg-violet-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600 sm:col-start-2 disabled:opacity-25"
                           disabled={form.title === '' || form.target === '' || form.startDate === ''}
                         >
-                          Create
+                          Save
                         </button>
                         <button
                           type="button"
                           className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:col-start-1 sm:mt-0"
-                          onClick={closeAddDialog}
+                          onClick={closeEditDialog}
                         >
                           Cancel
                         </button>
@@ -187,4 +167,4 @@ function AddDialog() {
   )
 }
 
-export default AddDialog
+export default EditDialog

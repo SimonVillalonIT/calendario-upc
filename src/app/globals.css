@@ -1,52 +1,62 @@
 @import "tailwindcss";
 
 :root {
-  @apply bg-gray-50;
+  background-color: #f9fafb; /* bg-gray-50 */
 }
 
 input {
-  @apply px-2;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
-  .fc-header-toolbar {
-    display: inline-block;
-    padding: 4px 4px;
-    
-    @apply space-x-8;
+
+.fc-header-toolbar {
+  display: inline-block;
+  padding: 4px 4px;
+  column-gap: 2rem; /* space-x-8 */
 }
 
 .fc-day {
-  @apply m-8;
+  margin: 2rem; /* m-8 */
 }
 
 .fc-scrollgrid-sync-table {
-  @apply w-full;
+  width: 100%;
 }
 
 .fc-view {
-  @apply w-full h-full lg:h-3/4 xl:h-2/3 bg-white;
+  width: 100%;
+  height: 100%;
+  max-height: 75%; /* lg:h-3/4 */
+  /* xl:h-2/3 no exacto con css puro, ajusta según layout */
+  background-color: #ffffff;
 }
 
-.fc-h-event {
-  @apply bg-violet-500 border border-violet-600 ;
-  
+/* Eventos horizontales */
+.fc-h-event,
+.fc-v-event {
+  background-color: #edbb06; /* primary-500 */
+  border: 1px solid #be9605; /* primary-600 */
 }
 
+/* Día actual */
 .fc .fc-daygrid-day.fc-day-today {
-  @apply bg-violet-100 ;
+  background-color: #fdf9e6; /* primary-100 */
 }
 
-.fc .fc-button{
-  @apply bg-violet-800 hover:bg-violet-900  ;
+/* Botones */
+.fc .fc-button {
+  background-color: #8e7004; /* primary-700 */
+  color: #ffffff;
+}
+
+.fc .fc-button:hover {
+  background-color: #5f4a02; /* primary-800 */
 }
 
 .fc .fc-button-primary:not(:disabled).fc-button-active {
-  @apply bg-violet-600;
+  background-color: #be9605; /* primary-600 */
 }
 
 .fc .fc-button-primary:disabled {
-  @apply bg-violet-600;
-}
-.fc-v-event {
-  @apply bg-violet-500 border border-violet-600 ;
-  
+  background-color: #be9605; /* primary-600 */
 }

@@ -38,7 +38,10 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ message: 'User created successfully.', userId: user?.id }, { status: 200 });
 
-  } catch (err: any) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+  } catch (err) {
+    if (err instanceof Error) {
+      return NextResponse.json({ error: err.message }, { status: 500 });
+    }
+    return NextResponse.json({ error: 'Unexpected error' }, { status: 500 });
   }
 }

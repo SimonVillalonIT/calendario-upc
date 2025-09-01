@@ -1,17 +1,15 @@
+import { useCalendarStore } from '@/stores/calendar-store'
+import { useDialogStore } from '@/stores/dialog-store'
 import { Dialog, Transition } from '@headlessui/react'
 import { ExclamationTriangleIcon } from '@heroicons/react/16/solid'
 import React, { Fragment } from 'react'
 
-function DeleteDialog({ showDeleteModal, setShowDeleteModal, handleCloseModal, handleDelete }: {
-    showDeleteModal: boolean,
-    setShowDeleteModal: (show: boolean) => void, 
-    newEvent: { title: string, start: string | Date, allDay: boolean, id: number },
-    handleCloseModal: () => void,
-    handleDelete: () => void,
-}) {
+function DeleteDialog() {
+    const { eventId, showDeleteDialog, closeDeleteDialog} = useDialogStore()
+    const { deleteEvent } = useCalendarStore()
     return (
-        <Transition.Root show={showDeleteModal} as={Fragment}>
-            <Dialog as="div" className="relative z-10" onClose={setShowDeleteModal}>
+        <Transition.Root show={showDeleteDialog} as={Fragment}>
+            <Dialog as="div" className="relative z-10" onClose={closeDeleteDialog}>
                 <Transition.Child
                     as={Fragment}
                     enter="ease-out duration-300"
@@ -59,12 +57,12 @@ function DeleteDialog({ showDeleteModal, setShowDeleteModal, handleCloseModal, h
                                 </div>
                                 <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                                     <button type="button" className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm 
-                      font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto" onClick={handleDelete}>
+                      font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto" onClick={(e) => {deleteEvent(eventId as string);closeDeleteDialog()}}>
                                         Delete
                                     </button>
                                     <button type="button" className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 
                       shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                                        onClick={handleCloseModal}
+                                        onClick={closeDeleteDialog}
                                     >
                                         Cancel
                                     </button>
