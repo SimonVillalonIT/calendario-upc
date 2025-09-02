@@ -4,6 +4,7 @@ import CalendarComponent from '@/components/calendar-component'
 import AddDialog from '@/components/add-dialog'
 import DeleteDialog from '@/components/delete-dialog'
 import ViewDialog from '@/components/view-dialog';
+import EditDialog from '@/components/edit-dialog';
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <DeleteDialog  />
       <AddDialog />
       <ViewDialog />
+      <EditDialog />
     </main >
   );
 }

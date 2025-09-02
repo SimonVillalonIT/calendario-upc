@@ -36,7 +36,7 @@ function ViewDialog() {
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
                 <div className='relative'>
-                  <OptionsMenu className='absolute -top-4 right-2' />
+                  <OptionsMenu eventId={tempEvent.id} className='absolute -top-4 right-2' />
                   <div className="mt-3 text-center sm:mt-5">
                     <div className="mt-2 space-y-2 text-left">
                       <p><strong>Title:</strong> {tempEvent.title}</p>

@@ -3,12 +3,15 @@
 import useUser from "@/hooks/user-hook";
 import { UserIcon } from "@heroicons/react/16/solid";
 import Link from "next/link";
+import ThemeSwitcher from "./theme-switch";
 
 export default function Navbar() {
     const {user, signOut} = useUser()
     return (
         <nav className="flex justify-between items-end mb-12 border-b border-violet-100 p-4">
             <h1 className="font-bold text-2xl text-gray-700">Calendar</h1>
+            <div className="flex items-center gap-6">
+            <ThemeSwitcher />
             {user ? (
                 <div className="flex gap-4 items-center">
                     <div className="w-fit flex gap-2 text-gray-600">
@@ -24,6 +27,7 @@ export default function Navbar() {
                     Iniciar Sesión
                 </Link>
             )}
+            </div>
         </nav>
     );
 }

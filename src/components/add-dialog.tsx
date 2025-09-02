@@ -76,7 +76,7 @@ function AddDialog() {
                   </div>
                   <div className="mt-3 text-center sm:mt-5">
                     <Dialog.Title as="h3" className="text-base font-semibold leading-6 text-gray-900">
-                      Add Event
+                      Agregar Evento
                     </Dialog.Title>
                     <form onSubmit={handleSubmit} className="mt-2 space-y-2">
                       <input
@@ -103,10 +103,10 @@ function AddDialog() {
                         onChange={handleChange}
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
                       >
-                        <option value="">Select priority</option>
-                        <option value="low">Low</option>
-                        <option value="medium">Medium</option>
-                        <option value="high">High</option>
+                        <option value="">Selecciona Prioridad</option>
+                        <option value="baja">Baja</option>
+                        <option value="media">Media</option>
+                        <option value="alta">Alta</option>
                       </select>
 
                       <select
@@ -116,8 +116,8 @@ function AddDialog() {
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
                         required
                       >
-                        <option value="">Select visibility</option>
-                        <option value="admin">Admin</option>
+                        <option value="">Selecciona quien puede verlo</option>
+                        {user.role === 'admin' ? <option value="admin">Administrador</option> : null}
                         <option value="profesor">Profesor</option>
                         <option value="alumno">Alumno</option>
                       </select>
